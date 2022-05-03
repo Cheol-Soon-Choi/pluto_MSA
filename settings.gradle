@@ -1,3 +1,4 @@
 rootProject.name = 'pluto_MSA'
 include 'MemberService'
+include 'common-module'
 

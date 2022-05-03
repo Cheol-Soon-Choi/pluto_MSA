@@ -70,9 +70,14 @@ subprojects {
         useJUnitPlatform()
     }
 }
+project(':common-module') {
+    dependencies {
+
+    }
+}
 
 project(':MemberService') {
     dependencies {
-
+        implementation project(':common-module')
     }
 }
