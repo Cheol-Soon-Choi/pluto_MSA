@@ -1,0 +1,78 @@
+buildscript {
+    ext {
+        springBootVersion = '2.3.7.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE"
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    group = 'com.ccs'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = '8'
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    jar {
+        enabled = false
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom("org.springframework.cloud:spring-cloud-dependencies:Hoxton.SR12")
+        }
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+
+        implementation('org.projectlombok:lombok')
+        annotationProcessor('org.projectlombok:lombok')
+        testImplementation('org.projectlombok:lombok')
+        testAnnotationProcessor('org.projectlombok:lombok')
+
+        runtimeOnly group: 'com.h2database', name: 'h2', version: '1.4.199'
+        implementation 'org.postgresql:postgresql:42.3.3'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        implementation 'org.springframework.boot:spring-boot-starter-actuator:2.3.2.RELEASE'
+
+        implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+        implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+
+        implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+        implementation 'com.querydsl:querydsl-jpa'
+        annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa"
+        annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+        annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}
+
+project(':MemberService') {
+    dependencies {
+
+    }
+}

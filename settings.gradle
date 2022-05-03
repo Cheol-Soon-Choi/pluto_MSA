@@ -1,0 +1,3 @@
+rootProject.name = 'pluto_MSA'
+include 'MemberService'
+
