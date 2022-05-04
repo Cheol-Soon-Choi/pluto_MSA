@@ -1,5 +1,6 @@
 package com.ccs.controllers;
 
+import com.ccs.config.ServiceConfig;
 import com.ccs.models.entity.Member;
 import com.ccs.services.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import java.util.List;
 public class MemberApiController {
 
     private final MemberService memberService;
+    private final ServiceConfig serviceConfig;
     private static final Logger logger = LoggerFactory.getLogger(MemberApiController.class);
 
     @GetMapping("/{memberId}")
@@ -41,5 +43,10 @@ public class MemberApiController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteMember(@PathVariable("memberId") Long memberId) {
         memberService.deleteMember(memberId);
+    }
+
+    @GetMapping("/")
+    public String getConfigValue() {
+        return serviceConfig.getExampleProperty();
     }
 }

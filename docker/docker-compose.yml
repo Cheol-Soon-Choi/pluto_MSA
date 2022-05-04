@@ -21,6 +21,7 @@ services:
     environment:
       EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
       EUREKASERVER_PORT: "8761"
+      ENCRYPT_KEY: "k0r@"
 
   memberserver:
     image: memberserver:latest
@@ -34,3 +35,4 @@ services:
       EUREKASERVER_PORT: "8761"
       DATABASESERVER_PORT: "5432"
       CONFIGSERVER_PORT:   "8888"
+      ENCRYPT_KEY: "k0r@"
