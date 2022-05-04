@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class MemberApiController {
@@ -20,13 +22,18 @@ public class MemberApiController {
         return memberService.getMember(memberId);
     }
 
+    @GetMapping("/memberlist")
+    public List<Member> getMemberList() {
+        return memberService.getMemberList();
+    }
+
     @PutMapping("/{memberId}")
     public void updateMember(@PathVariable("memberId") Long memberId, @RequestBody Member member) {
         memberService.updateMember(member);
     }
 
     @PostMapping("/{memberId}")
-    public Long saveMember(@RequestBody Member member) {
+    public Long saveMember(@RequestBody Member member, @PathVariable String memberId) {
         return memberService.saveMember(member);
     }
 

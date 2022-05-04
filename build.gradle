@@ -49,6 +49,7 @@ subprojects {
         testImplementation('org.projectlombok:lombok')
         testAnnotationProcessor('org.projectlombok:lombok')
 
+        implementation 'org.postgresql:postgresql:42.3.3'
         runtimeOnly group: 'com.h2database', name: 'h2', version: '1.4.199'
 
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -82,7 +83,6 @@ project(':ConfigServer') {
         implementation 'org.springframework.cloud:spring-cloud-config-server'
         implementation 'org.springframework.cloud:spring-cloud-starter-config'
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-        implementation 'org.postgresql:postgresql:42.3.3'
     }
 }
 

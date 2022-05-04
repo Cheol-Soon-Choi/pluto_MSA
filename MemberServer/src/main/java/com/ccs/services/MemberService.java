@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -28,10 +29,15 @@ public class MemberService {
         memberRepository.save(member);
 
     }
+
     @Transactional
     public void deleteMember(Long memberId) {
         memberRepository.deleteById(memberId);
     }
 
+    @Transactional
+    public List<Member> getMemberList() {
+        return memberRepository.findAll();
+    }
 
 }
