@@ -50,7 +50,6 @@ subprojects {
         testAnnotationProcessor('org.projectlombok:lombok')
 
         runtimeOnly group: 'com.h2database', name: 'h2', version: '1.4.199'
-        implementation 'org.postgresql:postgresql:42.3.3'
 
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         implementation 'org.springframework.boot:spring-boot-starter-actuator:2.3.2.RELEASE'
@@ -78,9 +77,20 @@ project(':EurekaServer') {
     }
 }
 
-project(':MemberService') {
+project(':ConfigServer') {
+    dependencies {
+        implementation 'org.springframework.cloud:spring-cloud-config-server'
+        implementation 'org.springframework.cloud:spring-cloud-starter-config'
+        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+        implementation 'org.postgresql:postgresql:42.3.3'
+    }
+}
+
+project(':MemberServer') {
     dependencies {
         implementation project(':common-module')
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.2.5.RELEASE'
+        implementation 'org.springframework.cloud:spring-cloud-config-client'
+        implementation 'org.springframework.cloud:spring-cloud-starter-config'
     }
 }

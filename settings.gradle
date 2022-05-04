@@ -1,5 +1,6 @@
 rootProject.name = 'pluto_MSA'
-include 'MemberService'
+include 'MemberServer'
 include 'common-module'
 include 'EurekaServer'
+include 'ConfigServer'
 

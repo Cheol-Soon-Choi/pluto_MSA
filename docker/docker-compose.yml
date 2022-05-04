@@ -1,0 +1,35 @@
+version: '2'
+services:
+  eurekaserver:
+    image: eurekaserver:latest
+    ports:
+      - "8761:8761"
+  database:
+    image: postgres:9.5
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1q2w3e4r
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  configserver:
+    image: configserver:latest
+    ports:
+      - "8888:8888"
+    environment:
+      EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
+      EUREKASERVER_PORT: "8761"
+
+  memberserver:
+    image: memberserver:latest
+    ports:
+      - "8080:8080"
+    environment:
+      PROFILE: "default"
+      SERVER_PORT: "8080"
+      EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
+      CONFIGSERVER_URI: "http://configserver:8888"
+      EUREKASERVER_PORT: "8761"
+      DATABASESERVER_PORT: "5432"
+      CONFIGSERVER_PORT:   "8888"
