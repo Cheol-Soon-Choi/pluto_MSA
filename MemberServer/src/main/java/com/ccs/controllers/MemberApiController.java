@@ -34,8 +34,8 @@ public class MemberApiController {
         memberService.updateMember(member);
     }
 
-    @PostMapping("/{memberId}")
-    public Long saveMember(@RequestBody Member member, @PathVariable String memberId) {
+    @PostMapping("/members")
+    public Long saveMember(@RequestBody Member member) {
         return memberService.saveMember(member);
     }
 
