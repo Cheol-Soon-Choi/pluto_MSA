@@ -34,7 +34,6 @@ public class ItemService {
         Item item = itemRepository.findById(newitem.getId()).orElseThrow(EntityNotFoundException::new);
         item.updateItem(newitem);
 
-
         return itemRepository.save(item).getId();
     }
 

@@ -20,7 +20,6 @@ public class ItemApiController {
     //관리자 상품 세부정보
     @GetMapping("/admin/items/{itemId}")
     public Item getItemDtl(@PathVariable("itemId") Long itemId) {
-
         return itemService.getItemDtl(itemId);
     }
 
@@ -34,5 +33,11 @@ public class ItemApiController {
     @PostMapping("/admin/items/{itemId}")
     public Long editItem(@RequestBody Item item, @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList) {
         return itemService.updateItem(item, itemImgFileList);
+    }
+
+    //사용자 상품 세부정보
+    @GetMapping("/items/{itemId}")
+    public Item itemDtl(@PathVariable("itemId") Long itemId) {
+        return itemService.getItemDtl(itemId);
     }
 }
