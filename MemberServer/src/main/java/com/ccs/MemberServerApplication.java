@@ -10,7 +10,6 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @RefreshScope
 public class MemberServerApplication {
 
-
     public static void main(String[] args) {
         SpringApplication.run(MemberServerApplication.class, args);
     }

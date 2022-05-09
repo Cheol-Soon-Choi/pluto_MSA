@@ -1,12 +1,15 @@
 package com.ccs.models.entity;
 
 import com.ccs.models.constant.ItemSellStatus;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
 @Getter
-@ToString
 @NoArgsConstructor
 @Entity
 @Setter
@@ -27,6 +30,7 @@ public class Item {
     private int stockNumber;
 
     @Lob
+    @Type(type = "org.hibernate.type.TextType")
     @Column(nullable = false)
     private String itemDetail;
 

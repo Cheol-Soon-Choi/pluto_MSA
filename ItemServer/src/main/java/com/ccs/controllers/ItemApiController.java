@@ -1,5 +1,6 @@
 package com.ccs.controllers;
 
+import com.ccs.config.ServiceConfig;
 import com.ccs.models.entity.Item;
 import com.ccs.services.ItemService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import java.util.List;
 public class ItemApiController {
 
     private final ItemService itemService;
+    private final ServiceConfig serviceConfig;
     private static final Logger logger = LoggerFactory.getLogger(ItemApiController.class);
 
     //관리자 상품 세부정보
@@ -39,5 +41,16 @@ public class ItemApiController {
     @GetMapping("/items/{itemId}")
     public Item itemDtl(@PathVariable("itemId") Long itemId) {
         return itemService.getItemDtl(itemId);
+    }
+
+    //아이템 리스트
+    @GetMapping("/itemlist")
+    public List<Item> items(){
+        return itemService.getItemList();
+    }
+
+    @GetMapping("/")
+    public String getConfigValue() {
+        return serviceConfig.getExampleProperty();
     }
 }
