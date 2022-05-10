@@ -64,3 +64,16 @@ services:
       DATABASESERVER_PORT: "5432"
       CONFIGSERVER_PORT: "8888"
       ENCRYPT_KEY: "K0R@"
+
+  zuulserver:
+    image: orderserver:latest
+    ports:
+      - "5555:5555"
+    environment:
+      PROFILE: "default"
+      SERVER_PORT: "5555"
+      CONFIGSERVER_URI: "http://configserver:8888"
+      EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
+      EUREKASERVER_PORT: "8761"
+      DATABASESERVER_PORT: "5432"
+      CONFIGSERVER_PORT: "8888"

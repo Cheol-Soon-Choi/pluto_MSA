@@ -115,3 +115,14 @@ project(':OrderServer') {
         implementation 'org.springframework.security:spring-security-rsa'
     }
 }
+
+project(':ZuulServer') {
+    dependencies {
+        implementation project(':common-module')
+        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-zuul:2.2.5.RELEASE'
+        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.2.5.RELEASE'
+        implementation 'org.springframework.cloud:spring-cloud-config-client'
+        implementation 'org.springframework.cloud:spring-cloud-starter-config'
+        implementation 'org.springframework.security:spring-security-rsa'
+    }
+}
