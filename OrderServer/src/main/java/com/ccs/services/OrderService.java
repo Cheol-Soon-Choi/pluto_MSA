@@ -1,7 +1,9 @@
 package com.ccs.services;
 
 import com.ccs.clients.ItemRestTemplateClient;
+import com.ccs.clients.MemberRestTemplateClient;
 import com.ccs.models.entity.Item;
+import com.ccs.models.entity.Member;
 import com.ccs.models.entity.Order;
 import com.ccs.models.entity.OrderRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,17 +20,28 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final ItemRestTemplateClient itemRestTemplateClient;
+    private final MemberRestTemplateClient memberRestTemplateClient;
 
     @Transactional
     public Order getOrder(Long orderId) {
-        return orderRepository.findById(orderId).orElseThrow(EntityNotFoundException::new);
+
+        Order order = orderRepository.findById(orderId).orElseThrow(EntityNotFoundException::new);
+        Item item = this.getItem(order.getItemId());
+        Member member = this.getMember(order.getMemberId());
+
+        order.setMemberName(member.getName());
+        order.setRole(member.getRole());
+        order.setItemName(item.getItemName());
+        order.setItemPrice(item.getPrice());
+
+        return order;
     }
 
     @Transactional
     public Long saveOrder(Order order) {
+
         Item item = this.getItem(order.getItemId());
-        order.setItemName(item.getItemName());
-        order.setItemPrice(item.getPrice());
+
         order.setTotalPrice(item.getPrice() * order.getOrderCount());
         order.setOrderDate(LocalDateTime.now());
 
@@ -37,6 +50,10 @@ public class OrderService {
 
     public Item getItem(Long itemId) {
         return itemRestTemplateClient.getItem(itemId);
+    }
+
+    public Member getMember(Long memberId) {
+        return memberRestTemplateClient.getMember(memberId);
     }
 
     @Transactional

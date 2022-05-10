@@ -8,7 +8,8 @@ import lombok.Setter;
 @Setter
 public class Member {
 
-    public String memberName;
-    public Role role;
+    private Long id;
+    private String name;
+    private Role role;
 
 }
