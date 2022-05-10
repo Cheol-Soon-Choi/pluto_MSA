@@ -4,4 +4,5 @@ include 'common-module'
 include 'EurekaServer'
 include 'ConfigServer'
 include 'ItemServer'
+include 'OrderServer'
 

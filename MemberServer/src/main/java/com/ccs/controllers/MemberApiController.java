@@ -19,7 +19,7 @@ public class MemberApiController {
     private static final Logger logger = LoggerFactory.getLogger(MemberApiController.class);
 
     //멤버 조회
-    @GetMapping("users/{memberId}")
+    @GetMapping("/users/{memberId}")
     public Member getMember(@PathVariable("memberId") Long memberId) {
         return memberService.getMember(memberId);
     }

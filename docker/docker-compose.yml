@@ -50,3 +50,17 @@ services:
       DATABASESERVER_PORT: "5432"
       CONFIGSERVER_PORT: "8888"
       ENCRYPT_KEY: "K0R@"
+
+  orderserver:
+    image: orderserver:latest
+    ports:
+      - "8082:8082"
+    environment:
+      PROFILE: "default"
+      SERVER_PORT: "8082"
+      EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
+      CONFIGSERVER_URI: "http://configserver:8888"
+      EUREKASERVER_PORT: "8761"
+      DATABASESERVER_PORT: "5432"
+      CONFIGSERVER_PORT: "8888"
+      ENCRYPT_KEY: "K0R@"
