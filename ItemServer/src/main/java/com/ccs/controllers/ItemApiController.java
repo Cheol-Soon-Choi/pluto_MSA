@@ -1,6 +1,7 @@
 package com.ccs.controllers;
 
 import com.ccs.config.ServiceConfig;
+import com.ccs.models.dto.ItemDto;
 import com.ccs.models.entity.Item;
 import com.ccs.services.ItemService;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,8 @@ public class ItemApiController {
 
     //관리자 상품 세부정보
     @GetMapping("/admin/items/{itemId}")
-    public Item getItemDtl(@PathVariable("itemId") Long itemId) {
+    public ItemDto getItemDtl(@PathVariable("itemId") Long itemId) {
+
         return itemService.getItemDtl(itemId);
     }
 
@@ -37,15 +39,9 @@ public class ItemApiController {
         return itemService.updateItem(item, itemImgFileList);
     }
 
-    //사용자 상품 세부정보
-    @GetMapping("/items/{itemId}")
-    public Item itemDtl(@PathVariable("itemId") Long itemId) {
-        return itemService.getItemDtl(itemId);
-    }
-
     //아이템 리스트
     @GetMapping("/itemlist")
-    public List<Item> items(){
+    public List<Item> items() {
         return itemService.getItemList();
     }
 

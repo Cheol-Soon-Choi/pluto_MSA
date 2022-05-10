@@ -9,5 +9,3 @@ INSERT INTO item (item_name, price, stock_number, item_detail, item_sell_status)
 INSERT INTO item (item_name, price, stock_number, item_detail, item_sell_status) values ('야구공', 250, 0, '정품', 'SOLD_OUT');
 INSERT INTO item (item_name, price, stock_number, item_detail, item_sell_status) values ('안경', 22500, 0, '야광', 'SOLD_OUT');
 INSERT INTO item (item_name, price, stock_number, item_detail, item_sell_status) values ('비트코인', 30000, 0, '사토시', 'SOLD_OUT');
-
-
