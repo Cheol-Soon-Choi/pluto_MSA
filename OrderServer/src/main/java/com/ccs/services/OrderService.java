@@ -1,5 +1,7 @@
 package com.ccs.services;
 
+import com.ccs.clients.ItemRestTemplateClient;
+import com.ccs.models.entity.Item;
 import com.ccs.models.entity.Order;
 import com.ccs.models.entity.OrderRepository;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -14,6 +17,7 @@ import java.util.List;
 public class OrderService {
 
     private final OrderRepository orderRepository;
+    private final ItemRestTemplateClient itemRestTemplateClient;
 
     @Transactional
     public Order getOrder(Long orderId) {
@@ -22,7 +26,17 @@ public class OrderService {
 
     @Transactional
     public Long saveOrder(Order order) {
+        Item item = this.getItem(order.getItemId());
+        order.setItemName(item.getItemName());
+        order.setItemPrice(item.getPrice());
+        order.setTotalPrice(item.getPrice() * order.getOrderCount());
+        order.setOrderDate(LocalDateTime.now());
+
         return orderRepository.save(order).getId();
+    }
+
+    public Item getItem(Long itemId) {
+        return itemRestTemplateClient.getItem(itemId);
     }
 
     @Transactional

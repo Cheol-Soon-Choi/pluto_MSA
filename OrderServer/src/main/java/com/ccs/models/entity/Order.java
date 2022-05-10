@@ -1,13 +1,11 @@
 package com.ccs.models.entity;
 
-import com.ccs.models.constant.OrderStatus;
+import com.ccs.models.constant.Role;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -22,12 +20,25 @@ public class Order {
 
     private Long memberId;
 
+    private Long itemId;
+
     private LocalDateTime orderDate;
 
-    @Enumerated(EnumType.STRING)
-    private OrderStatus orderStatus;
+    private Integer orderCount;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<OrderItem> orderItems = new ArrayList<>();
+    private Integer totalPrice;
+
+    @Transient
+    private String memberName;
+
+    @Transient
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @Transient
+    private String itemName;
+
+    @Transient
+    private Integer itemPrice;
 
 }
