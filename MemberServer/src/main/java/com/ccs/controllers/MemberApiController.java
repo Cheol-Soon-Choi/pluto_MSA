@@ -6,7 +6,6 @@ import com.ccs.services.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,30 +18,34 @@ public class MemberApiController {
     private final ServiceConfig serviceConfig;
     private static final Logger logger = LoggerFactory.getLogger(MemberApiController.class);
 
-    @GetMapping("/{memberId}")
+    //멤버 조회
+    @GetMapping("users/{memberId}")
     public Member getMember(@PathVariable("memberId") Long memberId) {
         return memberService.getMember(memberId);
     }
 
-    @GetMapping("/memberlist")
-    public List<Member> getMemberList() {
-        return memberService.getMemberList();
-    }
-
-    @PutMapping("/{memberId}")
-    public void updateMember(@PathVariable("memberId") Long memberId, @RequestBody Member member) {
-        memberService.updateMember(member);
-    }
-
-    @PostMapping("/members")
+    //멤버 생성
+    @PostMapping("/users")
     public Long saveMember(@RequestBody Member member) {
         return memberService.saveMember(member);
     }
 
-    @DeleteMapping("/{memberId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteMember(@PathVariable("memberId") Long memberId) {
-        memberService.deleteMember(memberId);
+    //멤버 수정
+    @PutMapping("/users/{memberId}")
+    public Long updateMember(@PathVariable("memberId") Long memberId, @RequestBody Member member) {
+        return memberService.updateMember(member);
+    }
+
+    //멤버 삭제
+    @DeleteMapping("/users/{memberId}")
+    public Long deleteMember(@PathVariable("memberId") Long memberId) {
+        return memberService.deleteMember(memberId);
+    }
+
+    //멤버 리스트
+    @GetMapping("/users")
+    public List<Member> getMemberList() {
+        return memberService.getMemberList();
     }
 
     @GetMapping("/")

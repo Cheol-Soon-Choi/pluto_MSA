@@ -25,14 +25,15 @@ public class MemberService {
     }
 
     @Transactional
-    public void updateMember(Member member) {
-        memberRepository.save(member);
+    public Long updateMember(Member member) {
+        return memberRepository.save(member).getId();
 
     }
 
     @Transactional
-    public void deleteMember(Long memberId) {
+    public Long deleteMember(Long memberId) {
         memberRepository.deleteById(memberId);
+        return memberId;
     }
 
     @Transactional
