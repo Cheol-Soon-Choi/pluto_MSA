@@ -1,7 +1,10 @@
 package com.ccs.services;
 
+import com.ccs.models.constant.Role;
 import com.ccs.models.entity.Member;
 import com.ccs.models.entity.MemberRepository;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +18,39 @@ public class MemberService {
     public final MemberRepository memberRepository;
 
     @Transactional
+    @HystrixCommand(fallbackMethod = "FallbackMember",
+            //쓰레드 풀 설정 - 벌크헤드
+            threadPoolKey = "MemberThreadPool",
+            threadPoolProperties = {
+                    @HystrixProperty(name = "coreSize", value = "30"),
+                    @HystrixProperty(name = "maxQueueSize", value = "10")
+            }
+    )
     public Member getMember(Long memberId) {
+
+        this.sleep();
+
         return memberRepository.findById(memberId).orElseThrow(EntityNotFoundException::new);
+    }
+
+    public void sleep() {
+        int a = (int) (Math.random() * 10 + 1);
+        try {
+            if (a > 5) {
+                Thread.sleep(2000);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Member FallbackMember(Long memberId) {
+        return Member.builder()
+                .id(memberId)
+                .name("Member_Fallback")
+                .password("1")
+                .role(Role.ADMIN)
+                .build();
     }
 
     @Transactional
@@ -27,7 +61,6 @@ public class MemberService {
     @Transactional
     public Long updateMember(Member member) {
         return memberRepository.save(member).getId();
-
     }
 
     @Transactional
