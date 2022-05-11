@@ -17,7 +17,7 @@ public class ItemRestTemplateClient {
 
         ResponseEntity<Item> restExchange =
                 restTemplate.exchange(
-                        "http://itemserver/items/{itemId}",
+                        "http://zuulserver/itemserver/items/{itemId}",
                         HttpMethod.GET,
                         null, Item.class, itemId);
 

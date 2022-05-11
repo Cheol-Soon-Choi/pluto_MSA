@@ -17,7 +17,7 @@ public class MemberRestTemplateClient {
 
         ResponseEntity<Member> restExchange =
                 restTemplate.exchange(
-                        "http://memberserver/users/{memberId}",
+                        "http://zuulserver/memberserver/users/{memberId}",
                         HttpMethod.GET,
                         null, Member.class, memberId);
 

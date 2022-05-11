@@ -1,7 +1,10 @@
 version: '2'
 services:
   eurekaserver:
-    image: eurekaserver:latest
+    build:
+      context: ./EurekaServer
+      dockerfile: Dockerfile
+#    image: eurekaserver:latest
     ports:
       - "8761:8761"
   database:
@@ -15,7 +18,10 @@ services:
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
   configserver:
-    image: configserver:latest
+    build:
+      context: ./ConfigServer
+      dockerfile: Dockerfile
+#    image: configserver:latest
     ports:
       - "8888:8888"
     environment:
@@ -24,7 +30,10 @@ services:
       ENCRYPT_KEY: "K0R@"
 
   memberserver:
-    image: memberserver:latest
+    build:
+      context: ./MemberServer
+      dockerfile: Dockerfile
+#    image: memberserver:latest
     ports:
       - "8080:8080"
     environment:
@@ -38,7 +47,10 @@ services:
       ENCRYPT_KEY: "K0R@"
 
   itemserver:
-    image: itemserver:latest
+    build:
+      context: ./ItemServer
+      dockerfile: Dockerfile
+#    image: itemserver:latest
     ports:
       - "8081:8081"
     environment:
@@ -52,7 +64,10 @@ services:
       ENCRYPT_KEY: "K0R@"
 
   orderserver:
-    image: orderserver:latest
+    build:
+      context: ./OrderServer
+      dockerfile: Dockerfile
+#    image: orderserver:latest
     ports:
       - "8082:8082"
     environment:
@@ -66,7 +81,10 @@ services:
       ENCRYPT_KEY: "K0R@"
 
   zuulserver:
-    image: orderserver:latest
+    build:
+      context: ./ZuulServer
+      dockerfile: Dockerfile
+#    image: zuulserver:latest
     ports:
       - "5555:5555"
     environment:

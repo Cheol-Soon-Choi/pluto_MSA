@@ -123,6 +123,5 @@ project(':ZuulServer') {
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.2.5.RELEASE'
         implementation 'org.springframework.cloud:spring-cloud-config-client'
         implementation 'org.springframework.cloud:spring-cloud-starter-config'
-        implementation 'org.springframework.security:spring-security-rsa'
     }
 }
