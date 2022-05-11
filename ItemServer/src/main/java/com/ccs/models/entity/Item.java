@@ -1,6 +1,7 @@
 package com.ccs.models.entity;
 
 import com.ccs.models.constant.ItemSellStatus;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,5 +30,14 @@ public class Item {
 
     @Enumerated(EnumType.STRING)
     private ItemSellStatus itemSellStatus;
+
+    @Builder
+    public Item(Long id, String itemName, Integer price, Integer stockNumber, ItemSellStatus itemSellStatus) {
+        this.id = id;
+        this.itemName = itemName;
+        this.price = price;
+        this.stockNumber = stockNumber;
+        this.itemSellStatus = itemSellStatus;
+    }
 
 }
