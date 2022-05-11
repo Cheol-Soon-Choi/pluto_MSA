@@ -3,9 +3,12 @@ package com.ccs.services;
 import com.ccs.models.constant.ItemSellStatus;
 import com.ccs.models.entity.Item;
 import com.ccs.models.entity.ItemRepository;
+import com.ccs.utils.UserContextHolder;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -15,7 +18,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ItemService {
-
+    private static final Logger logger = LoggerFactory.getLogger(ItemService.class);
     private final ItemRepository itemRepository;
 
     @Transactional
@@ -28,6 +31,9 @@ public class ItemService {
             }
     )
     public Item getItemDtl(Long itemId) {
+
+        logger.debug("$$$$$ ItemService.getItemDTL  Correlation id: {}", UserContextHolder.getContext().getCorrelationId());
+
         return itemRepository.findById(itemId).orElseThrow(EntityNotFoundException::new);
     }
 

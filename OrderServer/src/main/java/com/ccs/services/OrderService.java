@@ -6,6 +6,7 @@ import com.ccs.models.entity.Item;
 import com.ccs.models.entity.Member;
 import com.ccs.models.entity.Order;
 import com.ccs.models.entity.OrderRepository;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -48,10 +49,12 @@ public class OrderService {
         return orderRepository.save(order).getId();
     }
 
+    @HystrixCommand
     public Item getItem(Long itemId) {
         return itemRestTemplateClient.getItem(itemId);
     }
 
+    @HystrixCommand
     public Member getMember(Long memberId) {
         return memberRestTemplateClient.getMember(memberId);
     }
