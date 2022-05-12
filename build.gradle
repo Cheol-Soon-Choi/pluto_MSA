@@ -129,3 +129,10 @@ project(':ZuulServer') {
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix:2.2.5.RELEASE'
     }
 }
+
+project(':AuthServer') {
+    dependencies {
+        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.2.5.RELEASE'
+        implementation 'org.springframework.cloud:spring-cloud-security:2.0.0.RELEASE'
+    }
+}

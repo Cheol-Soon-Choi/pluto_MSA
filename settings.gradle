@@ -6,4 +6,5 @@ include 'ConfigServer'
 include 'ItemServer'
 include 'OrderServer'
 include 'ZuulServer'
+include 'AuthServer'
 
