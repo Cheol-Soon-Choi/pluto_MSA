@@ -95,3 +95,19 @@ services:
       EUREKASERVER_PORT: "8761"
       DATABASESERVER_PORT: "5432"
       CONFIGSERVER_PORT: "8888"
+
+  authserver:
+    build:
+      context: ./AuthServer
+      dockerfile: Dockerfile
+    ports:
+      - "8901:8901"
+    environment:
+      PROFILE: "default"
+      SERVER_PORT: "8901"
+      EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
+      CONFIGSERVER_URI: "http://configserver:8888"
+      EUREKASERVER_PORT: "8761"
+      DATABASESERVER_PORT: "5432"
+      CONFIGSERVER_PORT: "8888"
+      ENCRYPT_KEY: "K0R@"
