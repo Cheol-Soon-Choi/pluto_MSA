@@ -4,7 +4,7 @@ services:
     build:
       context: ./EurekaServer
       dockerfile: Dockerfile
-#    image: eurekaserver:latest
+    #    image: eurekaserver:latest
     ports:
       - "8761:8761"
   database:
@@ -14,14 +14,14 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=1q2w3e4r
-#      - POSTGRES_DB=eagle_eye_local
+    #      - POSTGRES_DB=eagle_eye_local
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
   configserver:
     build:
       context: ./ConfigServer
       dockerfile: Dockerfile
-#    image: configserver:latest
+    #    image: configserver:latest
     ports:
       - "8888:8888"
     environment:
@@ -33,7 +33,7 @@ services:
     build:
       context: ./MemberServer
       dockerfile: Dockerfile
-#    image: memberserver:latest
+    #    image: memberserver:latest
     ports:
       - "8080:8080"
     environment:
@@ -41,16 +41,18 @@ services:
       SERVER_PORT: "8080"
       EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
       CONFIGSERVER_URI: "http://configserver:8888"
+      AUTHSERVER_URI: "http://authserver:8901/auth/user"
       EUREKASERVER_PORT: "8761"
       DATABASESERVER_PORT: "5432"
-      CONFIGSERVER_PORT:   "8888"
+      CONFIGSERVER_PORT: "8888"
+      AUTHSERVER_PORT: "8091"
       ENCRYPT_KEY: "K0R@"
 
   itemserver:
     build:
       context: ./ItemServer
       dockerfile: Dockerfile
-#    image: itemserver:latest
+    #    image: itemserver:latest
     ports:
       - "8081:8081"
     environment:
@@ -58,16 +60,18 @@ services:
       SERVER_PORT: "8081"
       EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
       CONFIGSERVER_URI: "http://configserver:8888"
+      AUTHSERVER_URI: "http://authserver:8901/auth/user"
       EUREKASERVER_PORT: "8761"
       DATABASESERVER_PORT: "5432"
       CONFIGSERVER_PORT: "8888"
+      AUTHSERVER_PORT: "8091"
       ENCRYPT_KEY: "K0R@"
 
   orderserver:
     build:
       context: ./OrderServer
       dockerfile: Dockerfile
-#    image: orderserver:latest
+    #    image: orderserver:latest
     ports:
       - "8082:8082"
     environment:
@@ -75,16 +79,18 @@ services:
       SERVER_PORT: "8082"
       EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
       CONFIGSERVER_URI: "http://configserver:8888"
+      AUTHSERVER_URI: "http://authserver:8901/auth/user"
       EUREKASERVER_PORT: "8761"
       DATABASESERVER_PORT: "5432"
       CONFIGSERVER_PORT: "8888"
+      AUTHSERVER_PORT: "8091"
       ENCRYPT_KEY: "K0R@"
 
   zuulserver:
     build:
       context: ./ZuulServer
       dockerfile: Dockerfile
-#    image: zuulserver:latest
+    #    image: zuulserver:latest
     ports:
       - "5555:5555"
     environment:

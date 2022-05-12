@@ -18,8 +18,14 @@ echo "********************************************************"
 while ! `nc -z configserver $CONFIGSERVER_PORT`; do sleep 3; done
 echo "*******  Configuration Server has started"
 
+echo "********************************************************"
+echo "Starting Order Server with Configuration Service via Eureka :  $EUREKASERVER_URI" ON PORT: $SERVER_PORT;
+echo "Order server will use $AUTHSERVER_URI for URI"
+echo "********************************************************"
+
 java -Dserver.port=$SERVER_PORT \
      -Deureka.client.serviceUrl.defaultZone=$EUREKASERVER_URI \
      -Dspring.cloud.config.uri=$CONFIGSERVER_URI \
      -Dspring.profiles.active=$PROFILE \
+     -Dsecurity.oauth2.resource.userInfoUri=$AUTHSERVER_URI \
      -jar orderserver.jar
