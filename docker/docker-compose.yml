@@ -2,7 +2,7 @@ version: '2'
 services:
   eurekaserver:
     build:
-      context: ./EurekaServer
+      context: ../EurekaServer
       dockerfile: Dockerfile
     #    image: eurekaserver:latest
     ports:
@@ -19,7 +19,7 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
   configserver:
     build:
-      context: ./ConfigServer
+      context: ../ConfigServer
       dockerfile: Dockerfile
     #    image: configserver:latest
     ports:
@@ -31,7 +31,7 @@ services:
 
   memberserver:
     build:
-      context: ./MemberServer
+      context: ../MemberServer
       dockerfile: Dockerfile
     #    image: memberserver:latest
     ports:
@@ -50,7 +50,7 @@ services:
 
   itemserver:
     build:
-      context: ./ItemServer
+      context: ../ItemServer
       dockerfile: Dockerfile
     #    image: itemserver:latest
     ports:
@@ -69,7 +69,7 @@ services:
 
   orderserver:
     build:
-      context: ./OrderServer
+      context: ../OrderServer
       dockerfile: Dockerfile
     #    image: orderserver:latest
     ports:
@@ -88,7 +88,7 @@ services:
 
   zuulserver:
     build:
-      context: ./ZuulServer
+      context: ../ZuulServer
       dockerfile: Dockerfile
     #    image: zuulserver:latest
     ports:
@@ -104,7 +104,7 @@ services:
 
   authserver:
     build:
-      context: ./AuthServer
+      context: ../AuthServer
       dockerfile: Dockerfile
     ports:
       - "8901:8901"

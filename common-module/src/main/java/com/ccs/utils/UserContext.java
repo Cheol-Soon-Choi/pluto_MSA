@@ -9,13 +9,9 @@ import org.springframework.stereotype.Component;
 @Setter
 public class UserContext {
     public static final String CORRELATION_ID = "ccs-correlation-id";
-    public static final String AUTH_TOKEN = "ccs-auth-token";
-    public static final String USER_ID = "ccs-user-id";
-    public static final String ORG_ID = "ccs-org-id";
+    public static final String AUTH_TOKEN = "Authorization";
 
-    private String correlationId = "";
-    private String authToken = "";
-    private String userId = "";
-    private String orgId = "";
+    private String correlationId;
+    private String authToken;
 
 }
