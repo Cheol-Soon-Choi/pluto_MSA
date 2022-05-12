@@ -94,6 +94,7 @@ project(':MemberServer') {
         implementation 'org.springframework.cloud:spring-cloud-starter-config'
         implementation 'org.springframework.security:spring-security-rsa'
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix:2.2.5.RELEASE'
+        implementation 'org.springframework.cloud:spring-cloud-security:2.0.0.RELEASE'
     }
 }
 
@@ -105,6 +106,7 @@ project(':ItemServer') {
         implementation 'org.springframework.cloud:spring-cloud-starter-config'
         implementation 'org.springframework.security:spring-security-rsa'
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix:2.2.5.RELEASE'
+        implementation 'org.springframework.cloud:spring-cloud-security:2.0.0.RELEASE'
     }
 }
 
@@ -116,6 +118,7 @@ project(':OrderServer') {
         implementation 'org.springframework.cloud:spring-cloud-starter-config'
         implementation 'org.springframework.security:spring-security-rsa'
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix:2.2.5.RELEASE'
+        implementation 'org.springframework.cloud:spring-cloud-security:2.0.0.RELEASE'
     }
 }
 
