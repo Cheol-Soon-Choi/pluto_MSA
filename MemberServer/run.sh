@@ -19,8 +19,20 @@ while ! `nc -z configserver $CONFIGSERVER_PORT`; do sleep 3; done
 echo "*******  Configuration Server has started"
 
 echo "********************************************************"
+echo "Waiting for the zookeeper server to start on port  $KAFKASERVER_PORT"
+echo "********************************************************"
+while ! `nc -z zookeeper $KAFKASERVER_PORT`; do sleep 10; done
+echo "******* zookeeper Server has started"
+
+echo "********************************************************"
 echo "Starting Member Server with Configuration Service via Eureka :  $EUREKASERVER_URI" ON PORT: $SERVER_PORT;
 echo "Member server will use $AUTHSERVER_URI for URI"
+echo "Using Kafka Server: $KAFKASERVER_URI"
+echo "Using ZK    Server: $ZKSERVER_URI"
+echo "********************************************************"
+
+echo "********************************************************"
+echo "Starting Member Server!                                   "
 echo "********************************************************"
 
 java -Dserver.port=$SERVER_PORT \
@@ -28,4 +40,6 @@ java -Dserver.port=$SERVER_PORT \
      -Dspring.cloud.config.uri=$CONFIGSERVER_URI \
      -Dspring.profiles.active=$PROFILE \
      -Dsecurity.oauth2.resource.userInfoUri=$AUTHSERVER_URI \
+     -Dspring.cloud.stream.kafka.binder.zkNodes=$ZKSERVER_URI \
+     -Dspring.cloud.stream.kafka.binder.brokers=$KAFKASERVER_URI \
      -jar memberserver.jar

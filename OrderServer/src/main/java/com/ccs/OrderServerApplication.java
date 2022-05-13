@@ -1,11 +1,17 @@
 package com.ccs;
 
+import com.ccs.events.models.ItemChangeModel;
 import com.ccs.utils.UserContextInterceptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
+import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -19,7 +25,16 @@ import java.util.List;
 @RefreshScope
 @EnableHystrix
 @EnableResourceServer
+@EnableBinding(Sink.class)
 public class OrderServerApplication {
+
+    private static final Logger logger = LoggerFactory.getLogger(OrderServerApplication.class);
+
+    @StreamListener(Sink.INPUT)
+    public void loggerSink(ItemChangeModel itemChangeModel){
+        logger.debug("Received an event for item id {}", itemChangeModel.getItemId());
+    }
+
 
     // JWT토큰 전파를 위해 custom restTemplae 사용
     @Primary

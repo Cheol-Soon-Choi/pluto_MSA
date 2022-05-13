@@ -42,10 +42,14 @@ services:
       EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
       CONFIGSERVER_URI: "http://configserver:8888"
       AUTHSERVER_URI: "http://authserver:8901/auth/user"
+      KAFKASERVER_URI: "kafkaserver"
+      ZKSERVER_URI: "zookeeper"
       EUREKASERVER_PORT: "8761"
       DATABASESERVER_PORT: "5432"
       CONFIGSERVER_PORT: "8888"
       AUTHSERVER_PORT: "8091"
+      ZUULSERVER_PORT: "5555"
+      KAFKASERVER_PORT: "2181"
       ENCRYPT_KEY: "K0R@"
 
   itemserver:
@@ -57,14 +61,18 @@ services:
       - "8081:8081"
     environment:
       PROFILE: "default"
-      SERVER_PORT: "8081"
       EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
       CONFIGSERVER_URI: "http://configserver:8888"
       AUTHSERVER_URI: "http://authserver:8901/auth/user"
+      KAFKASERVER_URI: "kafkaserver"
+      ZKSERVER_URI: "zookeeper"
+      SERVER_PORT: "8081"
       EUREKASERVER_PORT: "8761"
       DATABASESERVER_PORT: "5432"
       CONFIGSERVER_PORT: "8888"
       AUTHSERVER_PORT: "8091"
+      ZUULSERVER_PORT: "5555"
+      KAFKASERVER_PORT: "2181"
       ENCRYPT_KEY: "K0R@"
 
   orderserver:
@@ -80,10 +88,14 @@ services:
       EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
       CONFIGSERVER_URI: "http://configserver:8888"
       AUTHSERVER_URI: "http://authserver:8901/auth/user"
+      KAFKASERVER_URI: "kafkaserver"
+      ZKSERVER_URI: "zookeeper"
       EUREKASERVER_PORT: "8761"
       DATABASESERVER_PORT: "5432"
       CONFIGSERVER_PORT: "8888"
       AUTHSERVER_PORT: "8091"
+      ZUULSERVER_PORT: "5555"
+      KAFKASERVER_PORT: "2181"
       ENCRYPT_KEY: "K0R@"
 
   zuulserver:
@@ -117,3 +129,24 @@ services:
       DATABASESERVER_PORT: "5432"
       CONFIGSERVER_PORT: "8888"
       ENCRYPT_KEY: "K0R@"
+
+  zookeeper:
+    image: wurstmeister/zookeeper
+    container_name: zookeeper
+    restart: always
+    ports:
+      - "2181:2181"
+
+  kafkaserver:
+    image: wurstmeister/kafka
+    container_name: kafka
+    restart: always
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    links:
+      - zookeeper:zookeeper
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181

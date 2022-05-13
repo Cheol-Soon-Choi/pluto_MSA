@@ -58,12 +58,15 @@ public class ItemService {
 
     @Transactional
     public Long updateItem(Item newitem) {
-        return itemRepository.save(newitem).getId();
+        Long itemId = itemRepository.save(newitem).getId();
+        simpleSourceBean.publishItemChange("UPDATE", newitem.getId());
+        return itemId;
     }
 
     @Transactional
-    public Long delItem(Long itemId){
+    public Long delItem(Long itemId) {
         itemRepository.deleteById(itemId);
+        simpleSourceBean.publishItemChange("DELETE", itemId);
         return itemId;
     }
 
