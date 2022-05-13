@@ -1,6 +1,6 @@
 package com.ccs.services;
 
-import com.ccs.events.soruce.SimpleSourceBean;
+import com.ccs.events.source.SimpleSourceBean;
 import com.ccs.models.constant.ItemSellStatus;
 import com.ccs.models.entity.Item;
 import com.ccs.models.entity.ItemRepository;

@@ -1,5 +1,6 @@
 package com.ccs.services;
 
+import com.ccs.events.source.SimpleSourceBean;
 import com.ccs.models.constant.Role;
 import com.ccs.models.entity.Member;
 import com.ccs.models.entity.MemberRepository;
@@ -16,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberService {
     public final MemberRepository memberRepository;
+    private final SimpleSourceBean simpleSourceBean;
 
     @Transactional
     @HystrixCommand(fallbackMethod = "FallbackMember",
@@ -55,17 +57,22 @@ public class MemberService {
 
     @Transactional
     public Long saveMember(Member member) {
-        return memberRepository.save(member).getId();
+        Long memberId = memberRepository.save(member).getId();
+        simpleSourceBean.publishMemberChange("SAVE", memberId);
+        return memberId;
     }
 
     @Transactional
     public Long updateMember(Member member) {
-        return memberRepository.save(member).getId();
+        Long memberId = memberRepository.save(member).getId();
+        simpleSourceBean.publishMemberChange("UPDATE", memberId);
+        return memberId;
     }
 
     @Transactional
     public Long deleteMember(Long memberId) {
         memberRepository.deleteById(memberId);
+        simpleSourceBean.publishMemberChange("DELETE", memberId);
         return memberId;
     }
 
