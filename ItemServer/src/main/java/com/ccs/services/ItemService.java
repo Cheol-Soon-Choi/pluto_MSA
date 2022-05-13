@@ -1,5 +1,6 @@
 package com.ccs.services;
 
+import com.ccs.events.soruce.SimpleSourceBean;
 import com.ccs.models.constant.ItemSellStatus;
 import com.ccs.models.entity.Item;
 import com.ccs.models.entity.ItemRepository;
@@ -20,6 +21,7 @@ import java.util.List;
 public class ItemService {
     private static final Logger logger = LoggerFactory.getLogger(ItemService.class);
     private final ItemRepository itemRepository;
+    private final SimpleSourceBean simpleSourceBean;
 
     @Transactional
     @HystrixCommand(fallbackMethod = "FallbackItem",
@@ -49,7 +51,9 @@ public class ItemService {
 
     @Transactional
     public Long saveItem(Item item) {
-        return itemRepository.save(item).getId();
+        Long itemId = itemRepository.save(item).getId();
+        simpleSourceBean.publishItemChange("SAVE", itemId);
+        return itemId;
     }
 
     @Transactional
