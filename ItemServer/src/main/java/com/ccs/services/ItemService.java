@@ -57,8 +57,13 @@ public class ItemService {
     }
 
     @Transactional
-    public Long updateItem(Item newitem) {
-        Long itemId = itemRepository.save(newitem).getId();
+    public Long updateItem(Long itemId, Item newitem) {
+        Item basicItem = itemRepository.findById(itemId).orElseThrow(EntityNotFoundException::new);
+        basicItem.setItemName(newitem.getItemName());
+        basicItem.setPrice(newitem.getPrice());
+        basicItem.setItemSellStatus(newitem.getItemSellStatus());
+        basicItem.setStockNumber(newitem.getStockNumber());
+        itemRepository.save(basicItem);
         simpleSourceBean.publishItemChange("UPDATE", newitem.getId());
         return itemId;
     }

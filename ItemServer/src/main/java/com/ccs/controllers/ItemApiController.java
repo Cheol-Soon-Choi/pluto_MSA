@@ -37,7 +37,7 @@ public class ItemApiController {
     //아이템 수정
     @PutMapping("/items/{itemId}")
     public Long editItem(@PathVariable("itemId") Long itemId, @RequestBody Item item) {
-        return itemService.updateItem(item);
+        return itemService.updateItem(itemId, item);
     }
 
     //아이템 삭제

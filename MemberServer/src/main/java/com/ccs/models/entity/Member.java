@@ -4,12 +4,14 @@ import com.ccs.models.constant.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "member")
 @Getter
+@Setter
 @NoArgsConstructor
 public class Member {
     @Id

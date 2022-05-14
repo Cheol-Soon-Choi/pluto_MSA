@@ -63,8 +63,13 @@ public class MemberService {
     }
 
     @Transactional
-    public Long updateMember(Member member) {
-        Long memberId = memberRepository.save(member).getId();
+    public Long updateMember(Long memberId, Member member) {
+        Member basicMember = memberRepository.findById(memberId).orElseThrow(EntityNotFoundException::new);
+        basicMember.setName(member.getName());
+        basicMember.setPassword(member.getPassword());
+        basicMember.setRole(member.getRole());
+        memberRepository.save(basicMember);
+
         simpleSourceBean.publishMemberChange("UPDATE", memberId);
         return memberId;
     }

@@ -33,7 +33,7 @@ public class MemberApiController {
     //멤버 수정
     @PutMapping("/users/{memberId}")
     public Long updateMember(@PathVariable("memberId") Long memberId, @RequestBody Member member) {
-        return memberService.updateMember(member);
+        return memberService.updateMember(memberId, member);
     }
 
     //멤버 삭제
