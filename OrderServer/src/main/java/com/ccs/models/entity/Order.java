@@ -26,8 +26,6 @@ public class Order {
 
     private Integer orderCount;
 
-    private Integer totalPrice;
-
     @Transient
     private String memberName;
 

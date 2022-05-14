@@ -128,6 +128,7 @@ project(':OrderServer') {
         implementation 'org.springframework.security:spring-security-jwt:1.0.9.RELEASE'
         implementation 'org.springframework.cloud:spring-cloud-stream:3.0.8.RELEASE'
         implementation 'org.springframework.cloud:spring-cloud-starter-stream-kafka:3.0.8.RELEASE'
+        implementation 'org.springframework.boot:spring-boot-starter-data-redis:2.3.4.RELEASE'
     }
 }
 
@@ -144,6 +145,8 @@ project(':ZuulServer') {
 
 project(':AuthServer') {
     dependencies {
+        implementation project(':common-module')
+        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix:2.2.5.RELEASE'
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.2.5.RELEASE'
         implementation 'org.springframework.cloud:spring-cloud-config-client'
         implementation 'org.springframework.cloud:spring-cloud-starter-config'

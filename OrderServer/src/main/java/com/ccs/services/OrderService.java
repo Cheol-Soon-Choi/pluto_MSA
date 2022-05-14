@@ -41,9 +41,6 @@ public class OrderService {
     @Transactional
     public Long saveOrder(Order order) {
 
-        Item item = this.getItem(order.getItemId());
-
-        order.setTotalPrice(item.getPrice() * order.getOrderCount());
         order.setOrderDate(LocalDateTime.now());
 
         return orderRepository.save(order).getId();

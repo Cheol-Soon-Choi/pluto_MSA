@@ -15,25 +15,25 @@ public class itemChangeHandler {
 
     @StreamListener("itemInput")
     public void loggerSink(ItemChangeModel itemChangeModel) {
-        logger.debug("Received a message of type " + itemChangeModel.getType());
+        logger.debug("##### Received a message of type " + itemChangeModel.getType());
 
         switch(itemChangeModel.getAction()){
             case "GET":
-                logger.debug("Received a GET event from the item server for Item id {}", itemChangeModel.getItemId());
+                logger.debug("##### Received a GET event from the item server for Item id {}", itemChangeModel.getItemId());
                 break;
             case "SAVE":
-                logger.debug("Received a SAVE event from the item server for Item id {}", itemChangeModel.getItemId());
+                logger.debug("##### Received a SAVE event from the item server for Item id {}", itemChangeModel.getItemId());
                 break;
             case "UPDATE":
-                logger.debug("Received a UPDATE event from the item server for Item id {}", itemChangeModel.getItemId());
+                logger.debug("##### Received a UPDATE event from the item server for Item id {}", itemChangeModel.getItemId());
 
                 break;
             case "DELETE":
-                logger.debug("Received a DELETE event from the item server for Item id {}", itemChangeModel.getItemId());
+                logger.debug("##### Received a DELETE event from the item server for Item id {}", itemChangeModel.getItemId());
 
                 break;
             default:
-                logger.error("Received an UNKNOWN event from the item server of type {}", itemChangeModel.getType());
+                logger.error("##### Received an UNKNOWN event from the item server of type {}", itemChangeModel.getType());
                 break;
 
         }
