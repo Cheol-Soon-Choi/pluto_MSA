@@ -9,7 +9,7 @@
 ## 2. 빠른 시작 
 |순서|내용|명령|
 |:---:|:---:|:---:|
-|1|프로젝트 빌드| ./gradlew clean build |
+|1|프로젝트 빌드|./gradlew clean build|
 |2|프로젝트 시작|docker-compose -f docker/docker-compose.yml up --build|
 |3|프로젝트 종료|docker-compose -f docker/docker-compose.yml down --rmi all|
         
@@ -38,9 +38,9 @@
 |순서|내용|설명|주소|
 |:---:|:---:|:---:|:---:|
 |1|준비|빠른 시작 1~2 실시|-|
-|2|JWT 토큰 획득|Method: POST,</br>Authorization-{Type: Basic Auth, Username: kore, Password: pluto},</br>Body{grant_type: password, scope: webclient, username: ccs or test, password: ccs or test}|`localhost:5555/authserver/auth/oauth/token`|
-|2-1|권한 확인|- 생략 가능 -</br>ccs권한: ROLE_USER, ROLE_ADMIN</br>test권한: ROLE_USER|`localhost:5555/authserver/auth/user`|
-|3|JWT 토큰 전달|Headers-{Authorization: bearer 획득한 토큰}|서비스 호출 주소|
+|2|JWT 토큰 획득|Method: POST,</br>Authorization-{Type: Basic Auth, Username: kore, Password: pluto},</br>Body-{grant_type: password, scope: webclient, username: ccs or test, password: ccs or test}|`localhost:5555/authserver/auth/oauth/token`|
+|3|권한 확인|- 생략 가능 -</br>ccs권한: ROLE_USER, ROLE_ADMIN</br>test권한: ROLE_USER|`localhost:5555/authserver/auth/user`|
+|4|JWT 토큰 전달|Headers-{Authorization: bearer 획득한 토큰}|서비스 API 호출|
 
 ## 5. 개발 환경 및 사용 기술
 - JAVA 8
