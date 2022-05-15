@@ -40,5 +40,5 @@
 - Netflix(Zuul, Eureka, Histrix)
 - Kafka
 - Zipkin
-- Docker
+- Docker, Docker Compose
 - Intellij ULTIMATE
