@@ -25,6 +25,12 @@ while ! `nc -z zookeeper $KAFKASERVER_PORT`; do sleep 10; done
 echo "******* zookeeper Server has started"
 
 echo "********************************************************"
+echo "Waiting for the ZIPKIN server to start  on port $ZIPKIN_PORT"
+echo "********************************************************"
+while ! `nc -z zipkin $ZIPKIN_PORT`; do sleep 10; done
+echo "******* ZIPKIN has started"
+
+echo "********************************************************"
 echo "Starting Member Server with Configuration Service via Eureka :  $EUREKASERVER_URI" ON PORT: $SERVER_PORT;
 echo "Member server will use $AUTHSERVER_URI for URI"
 echo "Using Kafka Server: $KAFKASERVER_URI"
@@ -38,8 +44,9 @@ echo "********************************************************"
 java -Dserver.port=$SERVER_PORT \
      -Deureka.client.serviceUrl.defaultZone=$EUREKASERVER_URI \
      -Dspring.cloud.config.uri=$CONFIGSERVER_URI \
-     -Dspring.profiles.active=$PROFILE \
      -Dsecurity.oauth2.resource.userInfoUri=$AUTHSERVER_URI \
      -Dspring.cloud.stream.kafka.binder.zkNodes=$ZKSERVER_URI \
      -Dspring.cloud.stream.kafka.binder.brokers=$KAFKASERVER_URI \
+     -Dspring.zipkin.baseUrl=$ZIPKIN_URI \
+     -Dspring.profiles.active=$PROFILE \
      -jar memberserver.jar
