@@ -1,6 +1,6 @@
 package com.ccs;
 
-import com.ccs.utils.UserContextInterceptor;
+import brave.sampler.Sampler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -11,9 +11,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Collections;
-import java.util.List;
 
 @SpringBootApplication
 @EnableEurekaClient
@@ -26,16 +23,13 @@ public class ItemServerApplication {
     @LoadBalanced
     @Bean
     public RestTemplate getCustomRestTemplate() {
-        RestTemplate template = new RestTemplate();
-        List interceptors = template.getInterceptors();
-        if (interceptors == null) {
-            template.setInterceptors(Collections.singletonList(new UserContextInterceptor()));
-        } else {
-            interceptors.add(new UserContextInterceptor());
-            template.setInterceptors(interceptors);
-        }
+        return new RestTemplate();
+    }
 
-        return template;
+    //모든 트랜잭션(100%)이 집킨 서버에 기록됨
+    @Bean
+    public Sampler defaultSampler() {
+        return Sampler.ALWAYS_SAMPLE;
     }
 
     public static void main(String[] args) {

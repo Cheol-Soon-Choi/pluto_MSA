@@ -42,6 +42,7 @@ services:
       EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
       CONFIGSERVER_URI: "http://configserver:8888"
       AUTHSERVER_URI: "http://authserver:8901/auth/user"
+      ZIPKIN_URI: "http://zipkin:9411"
       KAFKASERVER_URI: "kafkaserver"
       ZKSERVER_URI: "zookeeper"
       EUREKASERVER_PORT: "8761"
@@ -50,6 +51,7 @@ services:
       AUTHSERVER_PORT: "8091"
       ZUULSERVER_PORT: "5555"
       KAFKASERVER_PORT: "2181"
+      ZIPKIN_PORT: "9411"
       ENCRYPT_KEY: "K0R@"
 
   itemserver:
@@ -64,6 +66,7 @@ services:
       EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
       CONFIGSERVER_URI: "http://configserver:8888"
       AUTHSERVER_URI: "http://authserver:8901/auth/user"
+      ZIPKIN_URI: "http://zipkin:9411"
       KAFKASERVER_URI: "kafkaserver"
       ZKSERVER_URI: "zookeeper"
       SERVER_PORT: "8081"
@@ -73,6 +76,7 @@ services:
       AUTHSERVER_PORT: "8091"
       ZUULSERVER_PORT: "5555"
       KAFKASERVER_PORT: "2181"
+      ZIPKIN_PORT: "9411"
       ENCRYPT_KEY: "K0R@"
 
   orderserver:
@@ -90,12 +94,14 @@ services:
       AUTHSERVER_URI: "http://authserver:8901/auth/user"
       KAFKASERVER_URI: "kafkaserver"
       ZKSERVER_URI: "zookeeper"
+      ZIPKIN_URI: "http://zipkin:9411"
       EUREKASERVER_PORT: "8761"
       DATABASESERVER_PORT: "5432"
       CONFIGSERVER_PORT: "8888"
       AUTHSERVER_PORT: "8091"
       ZUULSERVER_PORT: "5555"
       KAFKASERVER_PORT: "2181"
+      ZIPKIN_PORT: "9411"
       ENCRYPT_KEY: "K0R@"
 
   zuulserver:
@@ -110,6 +116,7 @@ services:
       SERVER_PORT: "5555"
       CONFIGSERVER_URI: "http://configserver:8888"
       EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
+      ZIPKIN_URI: "http://zipkin:9411"
       EUREKASERVER_PORT: "8761"
       DATABASESERVER_PORT: "5432"
       CONFIGSERVER_PORT: "8888"
@@ -155,3 +162,8 @@ services:
     image: redis:alpine
     ports:
       - "6379:6379"
+
+  zipkin:
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"

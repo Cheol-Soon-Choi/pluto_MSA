@@ -99,7 +99,7 @@ project(':MemberServer') {
         implementation 'org.springframework.cloud:spring-cloud-stream:3.0.8.RELEASE'
         implementation 'org.springframework.cloud:spring-cloud-starter-stream-kafka:3.0.8.RELEASE'
         implementation 'org.springframework.cloud:spring-cloud-starter-sleuth:2.0.0.RELEASE'
-//        implementation 'org.springframework.cloud:spring-cloud-sleuth-zipkin:2.0.0.RELEASE'
+        implementation 'org.springframework.cloud:spring-cloud-sleuth-zipkin:2.0.0.RELEASE'
     }
 }
 
@@ -116,7 +116,7 @@ project(':ItemServer') {
         implementation 'org.springframework.cloud:spring-cloud-stream:3.0.8.RELEASE'
         implementation 'org.springframework.cloud:spring-cloud-starter-stream-kafka:3.0.8.RELEASE'
         implementation 'org.springframework.cloud:spring-cloud-starter-sleuth:2.0.0.RELEASE'
-//        implementation 'org.springframework.cloud:spring-cloud-sleuth-zipkin:2.0.0.RELEASE'
+        implementation 'org.springframework.cloud:spring-cloud-sleuth-zipkin:2.0.0.RELEASE'
     }
 }
 
@@ -134,7 +134,7 @@ project(':OrderServer') {
         implementation 'org.springframework.cloud:spring-cloud-starter-stream-kafka:3.0.8.RELEASE'
         implementation 'org.springframework.boot:spring-boot-starter-data-redis:2.3.4.RELEASE'
         implementation 'org.springframework.cloud:spring-cloud-starter-sleuth:2.0.0.RELEASE'
-//        implementation 'org.springframework.cloud:spring-cloud-sleuth-zipkin:2.0.0.RELEASE'
+        implementation 'org.springframework.cloud:spring-cloud-sleuth-zipkin:2.0.0.RELEASE'
     }
 }
 
@@ -147,6 +147,7 @@ project(':ZuulServer') {
         implementation 'org.springframework.cloud:spring-cloud-starter-config'
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix:2.2.5.RELEASE'
         implementation 'org.springframework.cloud:spring-cloud-starter-sleuth:2.0.0.RELEASE'
+        implementation 'org.springframework.cloud:spring-cloud-sleuth-zipkin:2.0.0.RELEASE'
     }
 }
 
