@@ -2,7 +2,6 @@ package com.ccs.events.source;
 
 import com.ccs.events.CustomChannels;
 import com.ccs.events.models.ItemChangeModel;
-import com.ccs.utils.UserContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,7 @@ public class SimpleSourceBean {
                 ItemChangeModel.class.getTypeName(),
                 action,
                 itemId,
-                UserContext.getCorrelationId()
+                "none"
         );
 
         //source클래스를 사용해서 메시지 전달 -> 단일채널에 메시지 전달시 사용

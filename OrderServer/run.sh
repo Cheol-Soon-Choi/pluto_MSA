@@ -50,9 +50,9 @@ echo "********************************************************"
 java -Dserver.port=$SERVER_PORT \
      -Deureka.client.serviceUrl.defaultZone=$EUREKASERVER_URI \
      -Dspring.cloud.config.uri=$CONFIGSERVER_URI \
-     -Dspring.zipkin.baseUrl=$ZIPKIN_URI \
      -Dsecurity.oauth2.resource.userInfoUri=$AUTHSERVER_URI \
      -Dspring.cloud.stream.kafka.binder.zkNodes=$ZKSERVER_URI \
      -Dspring.cloud.stream.kafka.binder.brokers=$KAFKASERVER_URI \
+     -Dspring.zipkin.baseUrl=$ZIPKIN_URI \
      -Dspring.profiles.active=$PROFILE \
      -jar orderserver.jar

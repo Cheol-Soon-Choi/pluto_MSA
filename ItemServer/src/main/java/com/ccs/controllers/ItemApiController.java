@@ -3,7 +3,6 @@ package com.ccs.controllers;
 import com.ccs.config.ServiceConfig;
 import com.ccs.models.entity.Item;
 import com.ccs.services.ItemService;
-import com.ccs.utils.UserContextHolder;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +21,6 @@ public class ItemApiController {
     //아이템 조회
     @GetMapping("/items/{itemId}")
     public Item getItemDtl(@PathVariable("itemId") Long itemId) {
-
-        logger.debug("$$$$$ ItemServiceController Correlation id: {}", UserContextHolder.getContext().getCorrelationId());
-
         return itemService.getItemDtl(itemId);
     }
 

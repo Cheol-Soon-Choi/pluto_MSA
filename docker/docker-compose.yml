@@ -102,6 +102,7 @@ services:
       ZUULSERVER_PORT: "5555"
       KAFKASERVER_PORT: "2181"
       ZIPKIN_PORT: "9411"
+      REDIS_PORT: "6379"
       ENCRYPT_KEY: "K0R@"
 
   zuulserver:
@@ -120,6 +121,7 @@ services:
       EUREKASERVER_PORT: "8761"
       DATABASESERVER_PORT: "5432"
       CONFIGSERVER_PORT: "8888"
+      ZIPKIN_PORT: "9411"
 
   authserver:
     build:

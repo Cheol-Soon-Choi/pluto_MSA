@@ -4,7 +4,6 @@ import com.ccs.events.source.SimpleSourceBean;
 import com.ccs.models.constant.ItemSellStatus;
 import com.ccs.models.entity.Item;
 import com.ccs.models.entity.ItemRepository;
-import com.ccs.utils.UserContextHolder;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import lombok.RequiredArgsConstructor;
@@ -33,9 +32,6 @@ public class ItemService {
             }
     )
     public Item getItemDtl(Long itemId) {
-
-        logger.debug("$$$$$ ItemService.getItemDTL  Correlation id: {}", UserContextHolder.getContext().getCorrelationId());
-
         return itemRepository.findById(itemId).orElseThrow(EntityNotFoundException::new);
     }
 
