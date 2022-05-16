@@ -2,6 +2,7 @@ package com.ccs;
 
 import brave.sampler.Sampler;
 import com.ccs.config.ServiceConfig;
+import com.ccs.utils.UserContextInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSeriali
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Collections;
+import java.util.List;
 
 @SpringBootApplication
 @EnableEurekaClient
@@ -68,7 +72,15 @@ public class OrderServerApplication {
     @LoadBalanced
     @Bean
     public RestTemplate getCustomRestTemplate() {
-        return new RestTemplate();
+        RestTemplate template = new RestTemplate();
+        List interceptors = template.getInterceptors();
+        if (interceptors == null) {
+            template.setInterceptors(Collections.singletonList(new UserContextInterceptor()));
+        } else {
+            interceptors.add(new UserContextInterceptor());
+            template.setInterceptors(interceptors);
+        }
+        return template;
     }
 
     //Oauth2 호출을 지원하는 restTemplate(Oauth 토큰 전파)

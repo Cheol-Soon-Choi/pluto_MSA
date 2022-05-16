@@ -30,7 +30,7 @@ public class MemberService {
     )
     public Member getMember(Long memberId) {
 
-        this.sleep();
+//        this.sleep();
 
         return memberRepository.findById(memberId).orElseThrow(EntityNotFoundException::new);
     }
