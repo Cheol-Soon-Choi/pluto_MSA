@@ -1,5 +1,6 @@
 package com.ccs.filters;
 
+import brave.Tracer;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import org.slf4j.Logger;
@@ -10,16 +11,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class PostFilter extends ZuulFilter {
 
-    private static final int  FILTER_ORDER=1;
-    private static final boolean  SHOULD_FILTER=true;
+    private static final int FILTER_ORDER = 1;
+    private static final boolean SHOULD_FILTER = true;
     private static final Logger logger = LoggerFactory.getLogger(PostFilter.class);
 
     @Autowired
-    FilterUtils filterUtils;
+    Tracer tracer;
 
     @Override
     public String filterType() {
-        return FilterUtils.POST_FILTER_TYPE;
+        return "post";
     }
 
     @Override
@@ -36,10 +37,8 @@ public class PostFilter extends ZuulFilter {
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
 
-        logger.debug("!!!!! Adding the correlation id to the outbound headers. {}", filterUtils.getCorrelationId());
-        ctx.getResponse().addHeader(FilterUtils.CORRELATION_ID, filterUtils.getCorrelationId());
-
-        logger.debug("!!!!! Completing outgoing request for {}.", ctx.getRequest().getRequestURI());
+        //슬루스를 사용하여 추적ID를 헤더에 삽입
+        ctx.getResponse().addHeader("ccs-correlation-id", tracer.currentSpan().context().traceIdString());
 
         return null;
     }
