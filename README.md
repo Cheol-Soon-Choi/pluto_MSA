@@ -42,7 +42,26 @@
 |3|권한 확인|- 생략 가능 -</br>ccs권한: ROLE_USER, ROLE_ADMIN</br>test권한: ROLE_USER|`localhost:5555/authserver/auth/user`|
 |4|JWT 토큰 전달|Headers-{Authorization: bearer 획득한 토큰}|서비스 API 호출|
 
-## 5. 개발 환경 및 사용 기술
+## 5. 서비스 API 구성
+|메소드|URI|설명|
+|:---:|:---:|:---:|
+|GET|`/users/{memberId}`|회원 조희|
+|POST|`/users`|회원 가입|
+|PUT|`/users/{memberId}`|회원 수정|
+|DELETE|`/users/{memberId}`|회원 삭제|
+|GET|`/users`|회원 리스트|
+|GET|`/items/{itemId}`|제품 조회|
+|POST|`/items`|제품 등록|
+|PUT|`/items/{itemId}`|제품 수정|
+|DELETE|`/items/{itemId}`|제품 삭제|
+|GET|`/items`|제품 리스트|
+|GET|`/orders/{orderId}`|주문 조회|
+|POST|`/orders`|주문 등록|
+|PUT|`/orders/{orderId}`|주문 수정|
+|DELETE|`/orders/{orderId}`|주문 삭제|
+|GET|`/orders`|주문 리스트|
+
+## 6. 개발 환경 및 사용 기술
 - JAVA 8
 - Spring boot 2.3.7 (Gradle)
 - Spring Cloud(Config, Stream, Slueth, Security)
