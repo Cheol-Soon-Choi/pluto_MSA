@@ -25,12 +25,33 @@
 
 ## 4. 주요 로직
 - Member 서버
-  - 회원 CRUD 수행
+  
+|메소드|URI|설명|
+|:---:|:---:|:---:|
+|GET|`/users/{memberId}`|회원 조희|
+|POST|`/users`|회원 가입|
+|PUT|`/users/{memberId}`|회원 수정|
+|DELETE|`/users/{memberId}`|회원 삭제|
+|GET|`/users`|회원 리스트|
 - Item 서버
-  - 제품 CRUD 수행
+  
+|메소드|URI|설명|
+|:---:|:---:|:---:|
+|GET|`/items/{itemId}`|제품 조회|
+|POST|`/items`|제품 등록|
+|PUT|`/items/{itemId}`|제품 수정|
+|DELETE|`/items/{itemId}`|제품 삭제|
+|GET|`/items`|제품 리스트|
 - Order 서버
-  - 주문 CRUD 수행
   - 주문 조회시 Member 서버 및 Item 서버 호출을 통한 주문 정보 제공
+  
+|메소드|URI|설명|
+|:---:|:---:|:---:|
+|GET|`/orders/{orderId}`|주문 조회*|
+|POST|`/orders`|주문 등록|
+|PUT|`/orders/{orderId}`|주문 수정|
+|DELETE|`/orders/{orderId}`|주문 삭제|
+|GET|`/orders`|주문 리스트|
 
 ## 4. 기능 확인
 - Postman을 통한 기능 확인 
@@ -42,26 +63,7 @@
 |3|권한 확인|- 생략 가능 -</br>ccs권한: ROLE_USER, ROLE_ADMIN</br>test권한: ROLE_USER|`localhost:5555/authserver/auth/user`|
 |4|서비스 호출|Headers-[Authorization: bearer {획득한 JWT 토큰}]|`localhost:5555/{serviceId}/서비스 API` 또는</br>`localhost:{service port}/서비스 API`|
 
-## 5. 서비스 API 구성
-|메소드|URI|설명|
-|:---:|:---:|:---:|
-|GET|`/users/{memberId}`|회원 조희|
-|POST|`/users`|회원 가입|
-|PUT|`/users/{memberId}`|회원 수정|
-|DELETE|`/users/{memberId}`|회원 삭제|
-|GET|`/users`|회원 리스트|
-|GET|`/items/{itemId}`|제품 조회|
-|POST|`/items`|제품 등록|
-|PUT|`/items/{itemId}`|제품 수정|
-|DELETE|`/items/{itemId}`|제품 삭제|
-|GET|`/items`|제품 리스트|
-|GET|`/orders/{orderId}`|주문 조회|
-|POST|`/orders`|주문 등록|
-|PUT|`/orders/{orderId}`|주문 수정|
-|DELETE|`/orders/{orderId}`|주문 삭제|
-|GET|`/orders`|주문 리스트|
-
-## 6. 개발 환경 및 사용 기술
+## 5. 개발 환경 및 사용 기술
 - JAVA 8
 - Spring boot 2.3.7 (Gradle)
 - Spring Cloud(Config, Stream, Slueth, Security)
