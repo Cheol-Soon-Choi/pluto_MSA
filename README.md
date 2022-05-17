@@ -38,9 +38,9 @@
 |순서|내용|설명|주소|
 |:---:|:---:|:---:|:---:|
 |1|준비|빠른 시작 1~2 실시|-|
-|2|JWT 토큰 획득|Method: POST,</br>Authorization-{Type: Basic Auth, Username: kore, Password: pluto},</br>Body-{grant_type: password, scope: webclient, username: ccs or test, password: ccs or test}|`localhost:5555/authserver/auth/oauth/token`|
+|2|JWT 토큰 획득|Method: POST,</br>Authorization-[Type: Basic Auth, Username: kore, Password: pluto],</br>Body-[grant_type: password, scope: webclient, username: ccs or test, password: ccs or test]|`localhost:5555/authserver/auth/oauth/token`|
 |3|권한 확인|- 생략 가능 -</br>ccs권한: ROLE_USER, ROLE_ADMIN</br>test권한: ROLE_USER|`localhost:5555/authserver/auth/user`|
-|4|서비스 호출|Headers-{Authorization: bearer 획득한 토큰}|`localhost:5555/{serviceId}/서비스 API`|
+|4|서비스 호출|Headers-[Authorization: bearer {획득한 JWT 토큰}]|`localhost:5555/{serviceId}/서비스 API` 또는</br>`localhost:{service port}/서비스 API`|
 
 ## 5. 서비스 API 구성
 |메소드|URI|설명|
