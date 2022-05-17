@@ -43,7 +43,7 @@
 |DELETE|`/items/{itemId}`|제품 삭제|
 |GET|`/items`|제품 리스트|
 - Order 서버
-  - 주문 조회시 Member 서버 및 Item 서버 호출을 통한 주문 정보 제공
+  - 주문 조회시 Member 서버(GET, /users/{userId}) 및 Item 서버(GET, /items/{itemId}) 호출을 통한 주문 정보 제공
   
 |메소드|URI|설명|
 |:---:|:---:|:---:|
